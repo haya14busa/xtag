@@ -10,14 +10,10 @@ import (
 
 // FindLatest finds latest tag matched with give xtag (e.g. v1.2.x).
 func FindLatest(xtag string, tags []string) (string, error) {
-	if !strings.HasSuffix(xtag, "x") {
-		return "", fmt.Errorf("xtag must ends with 'x': %q", xtag)
+	if !strings.HasSuffix(xtag, ".x") {
+		return "", fmt.Errorf("xtag must ends with '.x': %q", xtag)
 	}
-	target := "x"
-	if strings.HasSuffix(xtag, ".x") {
-		target = `\.x`
-	}
-	pattern := strings.Replace(regexp.QuoteMeta(xtag), target, `[0-9.]*`, -1)
+	pattern := "^" + strings.Replace(regexp.QuoteMeta(xtag), `\.x`, `(\.[0-9.]+)?`, -1) + "$"
 	re, err := regexp.Compile(pattern)
 	if err != nil {
 		return "", err
