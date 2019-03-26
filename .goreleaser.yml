@@ -17,7 +17,7 @@ archive:
 brew:
   github:
     owner: haya14busa
-    name: xtag-homebrew-tap
+    name: homebrew-xtag
   folder: Formula
   homepage:  https://github.com/haya14busa/xtag
   description: Finds latest release tag which matched with given tag with x wild card (a.k.a. xtag).
