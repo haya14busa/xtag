@@ -34,7 +34,7 @@ jobs:
             go get mvdan.cc/unparam
             go get github.com/mgechev/revive
             # https://github.com/goreleaser/godownloader/issues/92
-            curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s
+            curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s $(xtag golangci/golangci-lint v1.x)
             mv ./bin/golangci-lint $(go env GOPATH)/bin
       - run:
           name: Run Lint
