@@ -4,26 +4,33 @@
 
 xtag command finds latest release tag which matched with given tag with `x` wild card (a.k.a. xtag).
 
-### Installation
+## Installation
 
 ```shell
 # Install latest version
-curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s
+$ curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s
 
 # binary will be in $(go env GOPATH)/bin/
-curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s -- -b $(go env GOPATH)/bin [vX.Y.Z]
+$ curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s -- -b $(go env GOPATH)/bin [vX.Y.Z]
 
 # or install it into ./bin/
-curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s [vX.Y.Z]
+$ curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s [vX.Y.Z]
 
 # In alpine linux (as it does not come with curl by default)
-wget -O - -q https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s [vX.Y.Z]
+$ wget -O - -q https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s [vX.Y.Z]
 ```
 
 or you can use go get.
 
 ```shell
 $ go get github.com/haya14busa/xtag/cmd/xtag
+```
+
+### MacOS
+
+```shell
+$ brew tap haya14busa/xtag
+$ brew install xtag
 ```
 
 ## Usage
