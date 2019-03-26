@@ -1,5 +1,7 @@
 ## xtag
 
+[![CircleCI](https://circleci.com/gh/haya14busa/xtag.svg?style=svg)](https://circleci.com/gh/haya14busa/xtag)
+
 xtag command finds latest release tag which matched with given tag with `x` wild card (a.k.a. xtag).
 
 ### Installation
