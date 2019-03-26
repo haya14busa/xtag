@@ -14,9 +14,7 @@ jobs:
       - run:
           name: Install xtag
           command: |-
-            # https://github.com/goreleaser/godownloader/issues/92
-            curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s
-            mv ./bin/xtag $(go env GOPATH)/bin
+            curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s -- -b $(go env GOPATH)/bin
       - run:
           name: Install reviewdog
           command: |-
@@ -33,9 +31,8 @@ jobs:
             go get github.com/client9/misspell/cmd/misspell
             go get mvdan.cc/unparam
             go get github.com/mgechev/revive
-            # https://github.com/goreleaser/godownloader/issues/92
-            curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s $(xtag golangci/golangci-lint v1.x)
-            mv ./bin/golangci-lint $(go env GOPATH)/bin
+            curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh \
+              | sh -s -- -b $(go env GOPATH)/bin $(xtag golangci/golangci-lint v1.x)
       - run:
           name: Run Lint
           command: "reviewdog -reporter=github-pr-check"
