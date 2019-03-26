@@ -46,9 +46,11 @@ workflows:
   release:
     jobs:
       - test
+      - lint
       - release:
           requires:
             - test
+            - lint
           filters:
             branches:
               ignore: /.*/
