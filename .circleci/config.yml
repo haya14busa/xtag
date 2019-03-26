@@ -15,7 +15,7 @@ jobs:
           name: Install xtag
           command: |-
             # https://github.com/goreleaser/godownloader/issues/92
-            ./install.sh| sh -s -- -b $(go env GOPATH)/bin
+            ./install.sh -b $(go env GOPATH)/bin
       - run:
           name: Install reviewdog
           command: |-

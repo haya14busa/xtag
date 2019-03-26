@@ -50,7 +50,7 @@ execute() {
   hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
   srcdir="${tmpdir}"
   (cd "${tmpdir}" && untar "${TARBALL}")
-  if [ ! -d "${BINDIR}"]; then
+  if [ ! -d "${BINDIR}" ]; then
     install -d "${BINDIR}"
   fi
   for binexe in "xtag" ; do
