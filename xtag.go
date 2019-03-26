@@ -8,6 +8,12 @@ import (
 	"github.com/haya14busa/go-versionsort"
 )
 
+var X = 14
+
+func unused() {
+	fmt.Println("xtag")
+}
+
 // FindLatest finds latest tag matched with give xtag (e.g. v1.2.x).
 func FindLatest(xtag string, tags []string) (string, error) {
 	if !strings.HasSuffix(xtag, ".x") {
