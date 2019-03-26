@@ -1,5 +1,11 @@
 version: 2
 jobs:
+  test:
+    docker:
+      - image: circleci/golang:1.12
+    steps:
+      - checkout
+      - run: go test -v --race ./...
   release:
     docker:
       - image: circleci/golang:1.12
@@ -11,6 +17,8 @@ workflows:
   release:
     jobs:
       - release:
+          requires:
+            - test
           filters:
             branches:
               ignore: /.*/
