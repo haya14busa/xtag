@@ -50,7 +50,7 @@ execute() {
   hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
   srcdir="${tmpdir}"
   (cd "${tmpdir}" && untar "${TARBALL}")
-  install -d "${BINDIR}"
+  test ! -d "${BINDIR}" && install -d "${BINDIR}"
   for binexe in "xtag" ; do
     if [ "$OS" = "windows" ]; then
       binexe="${binexe}.exe"
