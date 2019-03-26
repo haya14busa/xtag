@@ -6,6 +6,39 @@ jobs:
     steps:
       - checkout
       - run: go test -v --race ./...
+  lint:
+    docker:
+      - image: circleci/golang:1.12
+    steps:
+      - checkout
+      - run:
+          name: Install xtag
+          command: |-
+            # https://github.com/goreleaser/godownloader/issues/92
+            curl -sfL https://raw.githubusercontent.com/haya14busa/xtag/master/install.sh| sh -s
+            mv ./bin/xtag $(go env GOPATH)/bin
+      - run:
+          name: Install reviewdog
+          command: |-
+            curl -fSL https://github.com/reviewdog/reviewdog/releases/download/$(xtag haya14busa/reviewdog 0.9.x)/reviewdog_linux_amd64 \
+            -o reviewdog && chmod +x ./reviewdog && mv ./reviewdog $(go env GOPATH)/bin/
+      - run:
+          name: Install linters
+          command: |-
+            go get golang.org/x/lint/golint
+            go get github.com/kisielk/errcheck
+            go get honnef.co/go/tools/cmd/gosimple
+            go get honnef.co/go/tools/cmd/staticcheck
+            go get honnef.co/go/tools/cmd/unused
+            go get github.com/client9/misspell/cmd/misspell
+            go get mvdan.cc/unparam
+            go get github.com/mgechev/revive
+            # https://github.com/goreleaser/godownloader/issues/92
+            curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s $(xtag golangci/golangci-lint v1.x)
+            mv ./bin/golangci-lint $(go env GOPATH)/bin
+      - run:
+          name: Run Lint
+          command: "reviewdog -reporter=github-pr-check"
   release:
     docker:
       - image: circleci/golang:1.12
@@ -17,9 +50,11 @@ workflows:
   release:
     jobs:
       - test
+      - lint
       - release:
           requires:
             - test
+            - lint
           filters:
             branches:
               ignore: /.*/
